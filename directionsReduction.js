@@ -11,39 +11,37 @@
 // ["WEST"]
 
 //My Solution
-function dirReduc(arr){
-  let obj = {}
-  for(let i = 0; i < arr.length; i++) {
-    obj[arr[i]] = (obj[arr[i]] || 0) + 1
+function dirReduc(arr) {
+  let obj = {};
+  for (let i = 0; i < arr.length; i++) {
+    obj[arr[i]] = (obj[arr[i]] || 0) + 1;
   }
-  
+
   function compare(first, second) {
-    if(obj[second]) {
-        if(obj[first] >= obj[second] && (obj[first] - obj[second]) !== 0) {
-          for(let i = 0; i < obj[first] - obj[second]; i++) newDir.push(first)
-        }
-      } 
-      else {
-        for(let i = 0; i < obj[first]; i++) newDir.push(first)
+    if (obj[second]) {
+      if (obj[first] >= obj[second] && obj[first] - obj[second] !== 0) {
+        for (let i = 0; i < obj[first] - obj[second]; i++) newDir.push(first);
       }
-  }
-  
-  let newDir = []
-  for(let dir in obj) {
-    if(dir === "NORTH") {
-      compare(dir, "SOUTH")
-    }
-    if(dir === "EAST") {
-      compare(dir, "WEST")
-    }
-    if(dir === "SOUTH") {
-      compare(dir, "NORTH")
-    }
-    if(dir === "WEST") {
-      compare(dir, "EAST")
+    } else {
+      for (let i = 0; i < obj[first]; i++) newDir.push(first);
     }
   }
-  
-  console.log(newDir)
-  return newDir
+
+  let newDir = [];
+  for (let dir in obj) {
+    if (dir === "NORTH") {
+      compare(dir, "SOUTH");
+    }
+    if (dir === "EAST") {
+      compare(dir, "WEST");
+    }
+    if (dir === "SOUTH") {
+      compare(dir, "NORTH");
+    }
+    if (dir === "WEST") {
+      compare(dir, "EAST");
+    }
+  }
+
+  return newDir;
 }
