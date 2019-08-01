@@ -10,7 +10,9 @@
 
 // ["WEST"]
 
-//My Solution
+//In order to be removed the values next to each other have to be opposites
+
+//My Solution, doesn't like their tests on some
 function dirReduc(arr) {
   let obj = {};
   for (let i = 0; i < arr.length; i++) {
@@ -44,4 +46,24 @@ function dirReduc(arr) {
   }
 
   return newDir;
+}
+
+//best solution
+function dirReduc(arr) {
+  let opposite = {
+    NORTH: "SOUTH",
+    EAST: "WEST",
+    SOUTH: "NORTH",
+    WEST: "EAST"
+  };
+
+  return arr.reduce(function(dirs, dir) {
+    // dirs = an array
+    //dir = current index value in arr
+
+    //.pop() removes the last item in the array
+    if (dirs[dirs.length - 1] === opposite[dir]) dirs.pop();
+    else dirs.push(dir);
+    return dirs;
+  }, []);
 }
